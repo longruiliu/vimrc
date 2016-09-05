@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/usr/local/.git'
+let g:netrw_dirhist_2='/Volumes/hulin/longruiliu'
+let g:netrw_dirhist_3='/Users/baidu/workspace/bgw_bcs'
+let g:netrw_dirhist_4='/Users/baidu/workspace/new/bgw'
+let g:netrw_dirhist_5='/Users/baidu/Downloads/openvpn-client'
+let g:netrw_dirhist_6='/Users/baidu/workspace/new/x86bgw/dpdk1.7.1/dpdk-1.7.1'
+let g:netrw_dirhist_7='/Users/baidu/workspace/new/x86bgw/dpdk1.7.1'

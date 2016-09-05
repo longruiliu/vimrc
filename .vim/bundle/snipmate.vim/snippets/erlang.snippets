@@ -1,0 +1,140 @@
+snippet #!
+	#!/usr/bin/env escript
+	${1}
+# module and export all
+snippet mod
+	-module(${1:`Filename('', 'my')`}).
+	${2}
+# define directive
+snippet def
+	-define(${1:_Macro}, ${2:_Body}).
+	${3}
+# export directive
+snippet exp
+	-export([${1:_FunctionArity}]).
+	${2}
+# import directive
+snippet imp
+	-import(${1:_Module}, [${2:_FuncArity, _FuncArity}]).
+	${3}
+snippet com
+	-compile([${1:export_all}]).
+	${2}
+# include directive
+snippet inc
+	-include("${1:File}").
+	${2}
+# include_lib directive
+snippet incb
+	-include_lib("${1:File}").
+	${2}
+# behavior directive
+snippet beh
+	-behaviour(${1:_Behaviour}).
+	${2}
+# match
+snippet pa
+	${1:_Pattern} -> ${2:_Body}
+# if expression
+snippet if
+	if
+	    ${1:_Body}
+	end
+# case expression
+snippet case
+	case ${1:_Expression} of
+	    ${2:_Body}
+	end
+# record directive
+snippet rec
+	-record(${1:_Record}, {${2:_Field}=${3:_Value}}).${4}
+# begin directive
+snippet begin
+	begin
+	    ${1:_Body}
+	end
+# fun directive
+snippet fun
+	fun (${1}) -> ${2:_Body} end
+# func directive
+snippet func
+	${1:_FuncName}(${2}) ->
+	    ${3:_Body}
+# doc directive
+snippet doc
+	%%--------------------------------------------------------------------
+	%% @doc
+	%% @spec ${1:_FuncName}(${2}) -> ${3:_Body}
+	%% @end
+	%%--------------------------------------------------------------------
+	${4}
+#ifdef directive
+snippet ifdef
+	-ifdef(${1:_Macro}).${2}
+#ifndef directive
+snippet ifndef
+	-ifndef(${1:_Macro}).${2}
+#endif directive
+snippet endif
+	-endif.${1}
+#tryof directive
+snippet tryof
+	try ${1:_Expression} of
+		${2:_Body}
+	catch
+		${3:_}:${4:_} -> ${5}
+	end
+	${6}
+#try directive
+snippet try
+	try
+		${1:_Expression}
+	catch
+		${2:_}:${3:_} -> ${4}
+	end
+	${5}
+#rcv directive
+snippet rcv
+	receive
+		${1:_Pattern [when _Guard]} -> ${2:_Body}
+	end
+	${3}
+#rcv directive
+snippet rcva
+	receive
+		${1:_Body}
+	after ${2:infinite} ->
+		${3:_Body}
+	end
+	${4}
+#loop directive
+snippet loop
+	${1:loop}(${2:`''`}) ->
+	    receive
+			${3:_Pattern} ->
+				$1($2)
+	    end.
+	${4}
+#template
+snippet template
+	-module(${1:`Filename('', 'my')`}).
+	-compile([export_all]).
+	
+	start() ->
+	    spawn(fun () -> loop([]) end).
+
+	rpc(Pid, Request) ->
+	    Pid ! {self(), Request},
+	    receive
+	        {Pid, Response} ->
+	            Response
+	    end.
+	
+	loop(L) ->
+	    receive
+	        {From, Request} ->
+	            io:format("loop received:~p~n", [Request]),
+	            From ! {self(), ${2:not_implemented}},
+	            loop(L)
+	    end.
+	${3}
